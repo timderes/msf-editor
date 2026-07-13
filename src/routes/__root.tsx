@@ -6,10 +6,11 @@ import {
 import { TanStackRouterDevtoolsPanel } from '@tanstack/react-router-devtools'
 import { TanStackDevtools } from '@tanstack/react-devtools'
 import TanStackQueryDevtools from '../integrations/tanstack-query/devtools'
-import appCss from '../styles.css?url'
-import '@mantine/core/styles.css'
 import { MantineProvider } from '@mantine/core'
 import type { QueryClient } from '@tanstack/react-query'
+
+// Import Mantine CSS in the root stylesheet
+import appCss from '../styles.css?url'
 
 interface MyRouterContext {
   queryClient: QueryClient
@@ -41,12 +42,13 @@ export const Route = createRootRouteWithContext<MyRouterContext>()({
 
 function RootDocument({ children }: { children: React.ReactNode }) {
   return (
-    <MantineProvider defaultColorScheme="light" deduplicateCssVariables>
-      <html lang="en" suppressHydrationWarning>
-        <head>
-          <HeadContent />
-        </head>
-        <body>
+    <html lang="en" suppressHydrationWarning>
+      <head>
+        <HeadContent />
+      </head>
+
+      <body>
+        <MantineProvider defaultColorScheme="light" deduplicateCssVariables>
           {children}
 
           <TanStackDevtools
@@ -61,9 +63,10 @@ function RootDocument({ children }: { children: React.ReactNode }) {
               TanStackQueryDevtools,
             ]}
           />
-          <Scripts />
-        </body>
-      </html>
-    </MantineProvider>
+        </MantineProvider>
+
+        <Scripts />
+      </body>
+    </html>
   )
 }
