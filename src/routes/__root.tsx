@@ -1,5 +1,7 @@
 import { Outlet, createRootRoute } from '@tanstack/react-router'
 import { MantineProvider } from '@mantine/core'
+import { ModalsProvider } from '@mantine/modals'
+import { Notifications } from '@mantine/notifications'
 
 export const Route = createRootRoute({
   head: () => ({
@@ -26,7 +28,10 @@ export const Route = createRootRoute({
 function RootLayout() {
   return (
     <MantineProvider defaultColorScheme="light" deduplicateCssVariables>
-      <Outlet />
+      <ModalsProvider>
+        <Notifications autoClose={15000} position="top-right" />
+        <Outlet />
+      </ModalsProvider>
     </MantineProvider>
   )
 }
