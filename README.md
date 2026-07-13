@@ -1,27 +1,21 @@
 MSF Editor is a static Vite + React + TanStack Router SPA.
 
-# Getting Started
-
-To run this application:
+## Getting Started
 
 ```bash
 npm install
 npm run dev
 ```
 
-## Building For Production
-
-To build this application for production:
+## Production Build
 
 ```bash
 npm run build
 ```
 
-The build outputs a static `dist/` folder with `index.html` and client assets only.
+The build outputs a static `dist/` directory with `index.html` and client assets only.
 
 ## Testing
-
-This project uses [Vitest](https://vitest.dev/) for testing. You can run the tests with:
 
 ```bash
 npm run test
@@ -29,107 +23,10 @@ npm run test
 
 ## Styling
 
-The app uses Mantine and Tiptap styles imported from `src/styles.css`.
-
-## Linting & Formatting
-
-This project uses [eslint](https://eslint.org/) and [prettier](https://prettier.io/) for linting and formatting. Eslint is configured using [tanstack/eslint-config](https://tanstack.com/config/latest/docs/eslint). The following scripts are available:
-
-```bash
-npm run lint
-npm run format
-npm run check
-```
+The app uses Mantine and Tiptap styles imported in `src/styles.css`.
 
 ## Routing
 
-This project uses [TanStack Router](https://tanstack.com/router) with file-based routing. Routes are managed as files in `src/routes`.
+This project uses TanStack Router with file-based routing. Add routes in `src/routes`, and use `Link` for SPA navigation.
 
-### Adding A Route
-
-To add a new route to your application just add a new file in the `./src/routes` directory.
-
-TanStack will automatically generate the content of the route file for you.
-
-Now that you have two routes you can use a `Link` component to navigate between them.
-
-### Adding Links
-
-To use SPA (Single Page Application) navigation you will need to import the `Link` component from `@tanstack/react-router`.
-
-```tsx
-import { Link } from '@tanstack/react-router'
-```
-
-Then anywhere in your JSX you can use it like so:
-
-```tsx
-<Link to="/about">About</Link>
-```
-
-This will create a link that will navigate to the `/about` route.
-
-More information on the `Link` component can be found in the [Link documentation](https://tanstack.com/router/v1/docs/framework/react/api/router/linkComponent).
-
-### Using A Layout
-
-In the file-based routing setup the layout is located in `src/routes/__root.tsx`. Anything you add to the root route will appear in all the routes. The route content will appear where you render `<Outlet />`.
-
-Here is an example layout that includes a header:
-
-```tsx
-import { HeadContent, Scripts, createRootRoute } from '@tanstack/react-router'
-
-export const Route = createRootRoute({
-  head: () => ({
-    meta: [
-      { charSet: 'utf-8' },
-      { name: 'viewport', content: 'width=device-width, initial-scale=1' },
-      { title: 'My App' },
-    ],
-  }),
-  shellComponent: ({ children }) => (
-    <html lang="en">
-      <head>
-        <HeadContent />
-      </head>
-      <body>
-        <header>
-          <nav>
-            <Link to="/">Home</Link>
-            <Link to="/about">About</Link>
-          </nav>
-        </header>
-        {children}
-        <Scripts />
-      </body>
-    </html>
-  ),
-})
-```
-
-More information on layouts can be found in the [Layouts documentation](https://tanstack.com/router/latest/docs/framework/react/guide/routing-concepts#layouts).
-
-## Data Fetching
-
-There are multiple ways to fetch data in your application. You can use TanStack Query to fetch data from a server. But you can also use the `loader` functionality built into TanStack Router to load the data for a route before it's rendered.
-
-For example:
-
-```tsx
-import { createFileRoute } from '@tanstack/react-router'
-
-export const Route = createFileRoute('/people')({
-  loader: async () => {
-    const response = await fetch('https://swapi.dev/api/people')
-    return response.json()
-  },
-  component: PeopleComponent,
-})
-
-function PeopleComponent() {
-  # Learn More
-      ))}
-  This project uses [TanStack Router](https://tanstack.com/router) with file-based routing. Add new route files under `src/routes` and use `<Link />` for SPA navigation.
-function MyComponent() {
-```
+The root layout lives in `src/routes/__root.tsx` and renders its children through `<Outlet />`.
